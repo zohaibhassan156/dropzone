@@ -781,12 +781,12 @@ var Dropzone = function (_Emitter) {
               e.preventDefault();
               e.stopPropagation();
               if (file.status === Dropzone.UPLOADING) {
-                return Dropzone.confirm(_this2.options.dictCancelUploadConfirmation, function () {
+                return Dropzone.confirm(file, _this2.options.dictCancelUploadConfirmation, function () {
                   return _this2.removeFile(file);
                 });
               } else {
                 if (_this2.options.dictRemoveFileConfirmation) {
-                  return Dropzone.confirm(_this2.options.dictRemoveFileConfirmation, function () {
+                  return Dropzone.confirm(file, _this2.options.dictRemoveFileConfirmation, function () {
                     return _this2.removeFile(file);
                   });
                 } else {
@@ -3117,7 +3117,7 @@ Dropzone.getElements = function (els, name) {
 //
 // The default implementation just uses `window.confirm` and then calls the
 // appropriate callback.
-Dropzone.confirm = function (question, accepted, rejected) {
+Dropzone.confirm = function (file, question, accepted, rejected) {
   if (window.confirm(question)) {
     return accepted();
   } else if (rejected != null) {
